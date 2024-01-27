@@ -21,3 +21,13 @@ class BinaryTree:
 				else:
 					current_node.right = new_node
 					break
+
+	def inorder(self):
+		self._inorder_recursive(self.head)
+
+	def _inorder_recursive(self, current_node):
+		if not current_node:
+			return
+		self._inorder_recursive(current_node.left)
+		print(current_node)
+		self._inorder_recursive(current_node.right)

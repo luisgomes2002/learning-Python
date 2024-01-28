@@ -11,4 +11,4 @@ tree.add(Node(8))
 tree.add(Node(30))
 
 tree.inorder()
-print(f'Found: {tree.find(11)}')
+print(tree.find(11))

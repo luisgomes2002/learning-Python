@@ -51,7 +51,7 @@ class BinaryTree:
 		while current_node:
 			if current_node.left and current_node.left.value == value or\
 				current_node.right and current_node.right.value == value:
-					return current_node.value
+					return current_node
 			elif value > current_node.value:
 				current_node = current_node.right
 			elif value < current_node.value:
@@ -71,20 +71,16 @@ class BinaryTree:
 			rightmost = self.find_rightmost(to_delete.left)
 			rightmost_parent = self.find_parent(rightmost.value)
 
-			if to_delete == to_delete_parent.left:
+			if rightmost_parent != to_delete:
 				rightmost_parent.right = rightmost.left
 				rightmost.left = to_delete.left
-				rightmost.right = to_delete.right
+			rightmost.right = to_delete.right
+
+			if to_delete == to_delete_parent.left:
 				to_delete_parent.left = rightmost
 			elif to_delete == to_delete_parent.right:
-				rightmost_parent.right = rightmost.left
-				rightmost.left = to_delete.left
-				rightmost.right = to_delete.right
 				to_delete_parent.right = rightmost
 			else: 
-				rightmost_parent.right = rightmost.left
-				rightmost.left = to_delete.left
-				rightmost.right = to_delete.right
 				self.head = rightmost
 		elif to_delete.left or to_delete.right:
 			if to_delete == to_delete_parent.left:
@@ -95,8 +91,8 @@ class BinaryTree:
 				self.head = to_delete.left or to_delete.right
 		else:
 			if to_delete == to_delete_parent.left:
-				to_delete == None
+				to_delete_parent.left = None
 			elif to_delete == to_delete_parent.right:
-				to_delete == None
+				to_delete_parent.right = None
 			else:
 				self.head = None
